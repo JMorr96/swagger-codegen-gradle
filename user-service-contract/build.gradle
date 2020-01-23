@@ -3,7 +3,9 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("io.swagger:swagger-codegen:2.3.1")
+//        classpath("io.swagger:swagger-codegen:2.3.1")
+        classpath('io.swagger.codegen.v3:swagger-codegen:3.0.16')
+        classpath('io.swagger.codegen.v3:swagger-codegen-generators:1.0.16')
     }
 }
 
@@ -11,8 +13,8 @@ apply plugin: 'base'
 
 group = 'com.arnoldgalovics.blog'
 
-import io.swagger.codegen.DefaultGenerator
-import io.swagger.codegen.config.CodegenConfigurator
+import io.swagger.codegen.v3.DefaultGenerator
+import io.swagger.codegen.v3.config.CodegenConfigurator
 
 subprojects {
     repositories {
@@ -59,6 +61,7 @@ ext.appName      = 'user-service'
 ext.apiPackage   = 'com.arnoldgalovics.blog.userservice.api'
 ext.modelPackage = 'com.arnoldgalovics.blog.userservice.model'
 //ext.swaggerFile  = "${rootDir}/api/swagger.yml"
+//ext.swaggerFile  = "${rootDir}/api/simple-inventory.json"
 ext.swaggerFile  = "${rootDir}/api/simple-inventory.yaml"
 
 project("${rootProject.appName}-server") { // user-service-server
