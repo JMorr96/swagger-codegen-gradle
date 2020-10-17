@@ -1,0 +1,255 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "FAANG Mutual Fund",
+    "description": "This API allows several different stock calculations for the FAANG mutual fund",
+    "version": "0.0.1"
+  },
+  "servers": [
+    {
+      "url": "//api.capgroupsolution.com/v1/mutualFundCalc"
+    }
+  ],
+  "paths": {
+    "/startAndEndDay": {
+      "get": {
+        "summary": "Returns an object with closing price.",
+        "description": "Get this endpoint to determine the first and last dates of the entire data set.",
+        "parameters": [
+          {
+            "name": "company",
+            "in": "query",
+            "description": "Used to select company.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An object with company and closing price.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/startEndDates"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/closingPrice": {
+      "post": {
+        "summary": "Returns closing price for company.",
+        "description": "Retrive the specific closing price for a company on a specific day.",
+        "parameters": [
+          {
+            "name": "company",
+            "in": "query",
+            "description": "Used to select company.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "day",
+            "in": "query",
+            "description": "Used to select company.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "month",
+            "in": "query",
+            "description": "Used to select company.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "description": "Used to select company.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The company closing price for a specific day.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/closingPrice"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/averageCloseByMonth": {
+      "post": {
+        "summary": "Return average closing price for a specific company in month.",
+        "description": "Retrieve the average closing price for company within month.",
+        "parameters": [
+          {
+            "name": "company",
+            "in": "query",
+            "description": "Used to select company.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "month",
+            "in": "query",
+            "description": "Used to select company.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "description": "Used to select company.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The average closing price for the month.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/closingPrice"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/topTenGainDays": {
+      "post": {
+        "summary": "Return top ten gaining days for a specific company.",
+        "description": "Retrieve the top ten gaining days for the company.",
+        "parameters": [
+          {
+            "name": "company",
+            "in": "query",
+            "description": "Used to select company.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The top gaining days.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/topTenGains"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "startEndDates": {
+        "type": "object",
+        "properties": {
+          "firstDate": {
+            "type": "string"
+          },
+          "lastDate": {
+            "type": "string"
+          }
+        }
+      },
+      "closingPrice": {
+        "type": "object",
+        "properties": {
+          "company": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "closingPrice": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "topTenGains": {
+        "type": "object",
+        "properties": {
+          "day": {
+            "type": "string"
+          },
+          "percentGain": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "parameters": {
+      "company": {
+        "name": "company",
+        "in": "query",
+        "description": "Used to select company.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "day": {
+        "name": "day",
+        "in": "query",
+        "description": "Used to select company.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "month": {
+        "name": "month",
+        "in": "query",
+        "description": "Used to select company.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "year": {
+        "name": "year",
+        "in": "query",
+        "description": "Used to select company.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
